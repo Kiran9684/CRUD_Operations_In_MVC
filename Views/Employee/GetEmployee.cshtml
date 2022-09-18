@@ -1,0 +1,52 @@
+﻿@model CRUD_Operations_In_MVC.Models.Employee
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h3>Employee Details</h3>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.EmployeeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+    </dl>
+    <p>
+        @Html.ActionLink("Back To Employees List", "GetAllEmployees")
+    </p>
+
+</body>
+</html>

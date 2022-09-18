@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CRUD_Operations_In_MVC.Models.Employee>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetEmployeeByDeptId</title>
+</head>
+<body>
+    <h3>Employee List</h3>
+    <div style="font-family:Arial"> 
+        <table class="table">
+            <tr>
+                <th>Employee Name</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "GetEmployee", new { id = item.EmployeeId })
+                    </td>
+                  
+                </tr>
+            }
+
+            <tr> 
+                <td> @Html.ActionLink("Back To Department List", "GetDepartments", "Department")</td> 
+            </tr>  
+        </table> 
+          
+       
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CRUD_Operations_In_MVC.Models.Department>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>GetDepartments</title>
+    </head>
+    <body>
+        @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+        <h2>Department List</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeptId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeptName)
+                </th>
+           
+            </tr>
+    
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeptId)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.DeptName)*@
+                        @Html.ActionLink(item.DeptName, "GetEmployeeByDeptId", "Employee",new { deptId = item.DeptId },null)
+                    </td>
+                    @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+                </tr>
+            }
+    
+        </table>
+    </body>
+</html>
