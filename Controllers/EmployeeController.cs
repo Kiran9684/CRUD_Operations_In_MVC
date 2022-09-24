@@ -18,10 +18,10 @@ namespace CRUD_Operations_In_MVC.Controllers
 
         public ActionResult GetAllEmployees()
         {
-           
+
             EmployeeRepository employeeRepository = new EmployeeRepository();
             return View(employeeRepository.GetAllEmployees());
-      
+
         }
 
         public ActionResult GetEmployee(int id)
@@ -30,7 +30,7 @@ namespace CRUD_Operations_In_MVC.Controllers
             return View(employeeRepository.getEmployee(id));
         }
 
-        public ActionResult GetEmployeeByDeptId (int deptId)
+        public ActionResult GetEmployeeByDeptId(int deptId)
         {
             EmployeeRepository employeeRepository = new EmployeeRepository();
             return View(employeeRepository.GetAllEmployeeByDeptId(deptId));
@@ -44,9 +44,9 @@ namespace CRUD_Operations_In_MVC.Controllers
             return View();
         }
 
-       [HttpPost]
-       [ActionName("CreateEmployee")]
-        public ActionResult CreateEmp_Post()  
+        [HttpPost]
+        [ActionName("CreateEmployee")]
+        public ActionResult CreateEmp_Post()
         {
             /*Re-rendering the departmentId Dropdown list in post method as well*/
             ViewBag.DepartmentIdList = GenerateDeptIdDropDown();
@@ -93,6 +93,26 @@ namespace CRUD_Operations_In_MVC.Controllers
             }
 
             return DeptIdList;
+        }
+
+        [HttpGet]
+        public ActionResult EditEmployee(int id)
+        {
+            EmployeeRepository employeeRepository = new EmployeeRepository();
+            Employee employee = employeeRepository.getEmployee(id);
+            ViewBag.DepartmentIdList = GenerateDeptIdDropDown();
+            return View(employee);
+        }
+
+        [HttpPost]
+        public ActionResult EditEmployee(Employee employee)
+        {
+            /*Re-rendering the departmentId Dropdown list in post method as well*/
+            ViewBag.DepartmentIdList = GenerateDeptIdDropDown();
+
+            EmployeeRepository employeeRepository = new EmployeeRepository();
+            employeeRepository.UpdateEmployee(employee);
+            return View(employee);
         }
     }
 }

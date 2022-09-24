@@ -164,5 +164,33 @@ namespace CRUD_Operations_In_MVC.Repository
             return count;
         }
 
+        public int UpdateEmployee(Employee employee)
+        {
+            createConnection();
+            string proc = "usp_UpdateEmployee";
+
+            SqlCommand sqlCommand = new SqlCommand(proc, empConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter EmpId = new SqlParameter() { ParameterName = "@EmpId", Value = employee.EmployeeId, DbType = System.Data.DbType.Int32 };
+            SqlParameter EmpName = new SqlParameter() { ParameterName = "@Name", Value = employee.Name, DbType = System.Data.DbType.String };
+            SqlParameter EmpGender = new SqlParameter() { ParameterName = "@Gender", Value = employee.Gender, DbType = System.Data.DbType.String };
+            SqlParameter EmpCity = new SqlParameter() { ParameterName = "@City", Value = employee.City, DbType = System.Data.DbType.String };
+            SqlParameter EmpSalary = new SqlParameter() { ParameterName = "@Salary", Value = employee.Salary, DbType = System.Data.DbType.Decimal };
+            SqlParameter EmpDeptId = new SqlParameter() { ParameterName = "@DepId", Value = employee.DeptId, DbType = System.Data.DbType.Int32 };
+
+            sqlCommand.Parameters.Add(EmpId);
+            sqlCommand.Parameters.Add(EmpName);
+            sqlCommand.Parameters.Add(EmpGender);
+            sqlCommand.Parameters.Add(EmpCity);
+            sqlCommand.Parameters.Add(EmpSalary);
+            sqlCommand.Parameters.Add(EmpDeptId);
+
+            empConnection.Open();
+            int count = sqlCommand.ExecuteNonQuery();
+            empConnection.Close();
+            return count;
+        }
+
     }
 }
