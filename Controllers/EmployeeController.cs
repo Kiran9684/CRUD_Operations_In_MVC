@@ -107,18 +107,20 @@ namespace CRUD_Operations_In_MVC.Controllers
 
         [HttpPost]
         [ActionName("EditEmployee")]
-        public ActionResult Edit_Post(int id)
+        public ActionResult Edit_Post( [Bind(Include = "EmployeeId,Gender,City,Salary,DeptId")]Employee employee)
         {
             /*Re-rendering the departmentId Dropdown list in post method as well*/
             ViewBag.DepartmentIdList = GenerateDeptIdDropDown();
 
             EmployeeRepository employeeRepository = new EmployeeRepository();
 
-            Employee employee = employeeRepository.getEmployee(id);
+            Employee employee_update = employeeRepository.getEmployee(employee.EmployeeId);
 
-            UpdateModel(employee, new string[] { "Gender", "City", "Salary", "DeptId" });
+            UpdateModel(employee_update, new string[] { "Gender", "City", "Salary", "DeptId" });
 
-            return View(employee);
+            //Now send this object to DAL Layer to update it in DB.
+            
+            return View(employee_update);
         }
     }
 }
