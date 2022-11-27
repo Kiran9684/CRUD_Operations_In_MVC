@@ -96,7 +96,8 @@ namespace CRUD_Operations_In_MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditEmployee(int id)
+        [ActionName("EditEmployee")]
+        public ActionResult Edit_Get(int id)
         {
             EmployeeRepository employeeRepository = new EmployeeRepository();
             Employee employee = employeeRepository.getEmployee(id);
@@ -105,13 +106,18 @@ namespace CRUD_Operations_In_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditEmployee(Employee employee)
+        [ActionName("EditEmployee")]
+        public ActionResult Edit_Post(int id)
         {
             /*Re-rendering the departmentId Dropdown list in post method as well*/
             ViewBag.DepartmentIdList = GenerateDeptIdDropDown();
 
             EmployeeRepository employeeRepository = new EmployeeRepository();
-            employeeRepository.UpdateEmployee(employee);
+
+            Employee employee = employeeRepository.getEmployee(id);
+
+            UpdateModel(employee, new string[] { "Gender", "City", "Salary", "DeptId" });
+
             return View(employee);
         }
     }
