@@ -192,5 +192,25 @@ namespace CRUD_Operations_In_MVC.Repository
             return count;
         }
 
+        public void DeleteEmployee(int EmpId)
+        {
+            createConnection();
+            string proc = "usp_removeEmployee";
+
+            SqlCommand sqlCommand = new SqlCommand(proc, empConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter EmpIdNo = new SqlParameter() { ParameterName = "@EmpId", Value = EmpId, DbType = System.Data.DbType.Int32 };
+
+            sqlCommand.Parameters.Add(EmpIdNo);
+
+            empConnection.Open();
+
+            int Count = sqlCommand.ExecuteNonQuery();
+
+            empConnection.Close();
+
+        }
+
     }
 }

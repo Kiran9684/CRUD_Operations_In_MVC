@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CRUD_Operations_In_MVC.Interface;
 using CRUD_Operations_In_MVC.Models;
 using CRUD_Operations_In_MVC.Repository;
 
@@ -116,11 +117,23 @@ namespace CRUD_Operations_In_MVC.Controllers
 
             Employee employee_update = employeeRepository.getEmployee(employee.EmployeeId);
 
-            UpdateModel(employee_update, new string[] { "Gender", "City", "Salary", "DeptId" });
+            //UpdateModel(employee_update, new string[] { "Gender", "City", "Salary", "DeptId" });
+
+            UpdateModel<IEmployee>(employee_update);
 
             //Now send this object to DAL Layer to update it in DB.
             
             return View(employee_update);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEmployee(int id)
+        {
+
+            EmployeeRepository employeeRepository = new EmployeeRepository();
+            employeeRepository.DeleteEmployee(id);
+
+            return RedirectToAction("GetAllEmployees");
         }
     }
 }
